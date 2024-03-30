@@ -5,9 +5,10 @@ const cors = require('cors')
 
 const app = express()
 
-const clientUrl = process.env.development
-  ? 'http://localhost:3000'
-  : 'https://YOUR-APP.com' // ? make sure to change this to your production URL
+const clientUrl =
+  process.env.NODE_ENV !== 'production'
+    ? 'http://localhost:5173'
+    : 'https://YOUR-APP.com' // ? make sure to change this to your production URL
 
 app.use(
   cors({

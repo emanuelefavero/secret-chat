@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import { v4 as uuidv4 } from 'uuid'
+import sendIcon from '/send-icon.svg'
 
 // TODO check for dev or prod, add proper server url depending on that @see https://vitejs.dev/guide/env-and-mode
 const serverUrl = 'http://localhost:4000'
@@ -79,7 +80,7 @@ function App() {
 
       <div className='flex justify-center'>
         <main className='w-full max-w-screen-lg'>
-          <div className='py-2'>
+          <div className='py-2 pb-16'>
             {messages.map((message, index) => (
               <Message
                 key={index}
@@ -88,14 +89,20 @@ function App() {
               />
             ))}
           </div>
-          <div>
+          <div className='fixed inset-x-0 bottom-0 flex p-4 bg-black border-t border-gray-800'>
             <input
+              className='w-full mr-2 text-inherit bg-inherit rounded-full px-4 focus:outline-none border border-gray-800'
               type='text'
               value={messageText}
               onChange={(e) => setMessageText(e.target.value)}
               placeholder='Type your message...'
             />
-            <button onClick={sendMessage}>Send</button>
+            <button
+              onClick={sendMessage}
+              className='rounded-full py-1 px-3 hover:bg-blue-600 active:bg-blue-700'
+            >
+              <img src={sendIcon} alt='Send' />
+            </button>
           </div>
         </main>
       </div>

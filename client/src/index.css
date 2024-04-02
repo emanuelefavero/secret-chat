@@ -5,8 +5,8 @@
 :root {
   --background: #fff;
   --foreground: #000;
-  --primary: #d946ef;
-  --selection: rgba(216, 70, 239, 0.3);
+  --primary: #3b82f6;
+  --selection: rgba(59, 131, 246, 0.3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -82,7 +82,7 @@ button[type='submit'],
 input[type='submit'] {
   background-color: var(--primary);
   color: #fff;
-  padding: 0.4rem 1.5rem;
+  padding: 0.1rem 1rem;
   border-radius: 0.5rem;
 }
 

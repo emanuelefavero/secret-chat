@@ -12,8 +12,8 @@ export default function MessageInput({
   sendMessage,
 }: Props) {
   return (
-    <>
-      <div className='fixed inset-x-0 bottom-0 flex p-4 bg-white dark:bg-black border-t border-gray-300 dark:border-gray-800'>
+    <div className='fixed inset-x-0 bottom-0 flex justify-center p-4 bg-white dark:bg-black border-t border-gray-300 dark:border-gray-800'>
+      <div className='w-full flex max-w-screen-lg'>
         <input
           className='w-full mr-2 text-inherit bg-inherit rounded-full px-4 focus:outline-none border border-gray-300 dark:border-gray-800'
           type='text'
@@ -32,6 +32,6 @@ export default function MessageInput({
           <img src={sendIcon} alt='Send' />
         </button>
       </div>
-    </>
+    </div>
   )
 }

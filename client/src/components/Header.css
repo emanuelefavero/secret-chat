@@ -1,0 +1,22 @@
+.user-id-copied-tooltip {
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.user-id-copied-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -15px; /* Adjust this value based on the size of your triangle */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px; /* Adjust size of the triangle */
+  border-style: solid;
+  border-color: transparent transparent var(--chat-message-background)
+    transparent; /* Match the lower border color to the tooltip background */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

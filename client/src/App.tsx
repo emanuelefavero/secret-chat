@@ -1,4 +1,3 @@
-import './App.css'
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import { v4 as uuidv4 } from 'uuid'
@@ -14,11 +13,20 @@ interface MessageProps {
 }
 
 function Message({ text, isCurrentUser }: MessageProps) {
-  const currentUserMessageStyle = isCurrentUser ? 'bg-blue-500' : ''
+  const currentUserMessageStyle = isCurrentUser
+    ? 'text-white bg-blue-500'
+    : 'text-gray-900 bg-gray-200 dark:text-white dark:bg-gray-900'
+  const justifyRightIfCurrentUser = isCurrentUser
+    ? 'justify-end'
+    : 'justify-start'
 
   return (
-    <div className={`${currentUserMessageStyle}`}>
-      <p>{text}</p>
+    <div className={`flex ${justifyRightIfCurrentUser}`}>
+      <div
+        className={`${currentUserMessageStyle} mb-2 px-3 py-1 rounded-2xl w-fit max-w-xs`}
+      >
+        <p>{text}</p>
+      </div>
     </div>
   )
 }
@@ -69,23 +77,27 @@ function App() {
     <>
       <h1 className='text-purple-500'>Secret Chat</h1>
 
-      <div>
-        {messages.map((message, index) => (
-          <Message
-            key={index}
-            text={message.text}
-            isCurrentUser={message.userId === userId}
-          />
-        ))}
-      </div>
-      <div>
-        <input
-          type='text'
-          value={messageText}
-          onChange={(e) => setMessageText(e.target.value)}
-          placeholder='Type your message...'
-        />
-        <button onClick={sendMessage}>Send</button>
+      <div className='flex justify-center'>
+        <main className='w-full max-w-screen-lg'>
+          <div className='py-2'>
+            {messages.map((message, index) => (
+              <Message
+                key={index}
+                text={message.text}
+                isCurrentUser={message.userId === userId}
+              />
+            ))}
+          </div>
+          <div>
+            <input
+              type='text'
+              value={messageText}
+              onChange={(e) => setMessageText(e.target.value)}
+              placeholder='Type your message...'
+            />
+            <button onClick={sendMessage}>Send</button>
+          </div>
+        </main>
       </div>
     </>
   )

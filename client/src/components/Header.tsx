@@ -23,9 +23,9 @@ export default function Header({ userId }: Props) {
         <div className='relative flex flex-col items-center'>
           <button
             onClick={handleCopyUserId}
-            className='bg-transparent px-0 w-max'
+            className='text-green-500 bg-transparent px-0 w-max hover:text-green-400 active:scale-95 transition-all duration-200 ease-in'
           >
-            <code className='text-green-500'>{userId}</code>
+            <code>{userId}</code>
           </button>
 
           {isCopied && (

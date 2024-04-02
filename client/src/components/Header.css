@@ -1,3 +1,9 @@
+header {
+  background-color: var(--header-background);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+}
+
 .user-id-copied-tooltip {
   opacity: 0;
   animation: fadeIn 0.3s forwards;

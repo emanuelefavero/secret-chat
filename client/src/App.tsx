@@ -50,9 +50,9 @@ function App() {
     <>
       <Header userId={userId} />
 
-      <div className='flex justify-center'>
+      <div className='flex justify-center px-4'>
         <main className='w-full max-w-screen-lg'>
-          <div className='py-2 pb-16 pt-4'>
+          <div className='pb-20 pt-28'>
             {messages.map((message, index) => (
               <Message
                 key={index}

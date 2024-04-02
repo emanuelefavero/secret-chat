@@ -15,7 +15,7 @@ export default function Header({ userId }: Props) {
   }
 
   return (
-    <header>
+    <header className='fixed w-full py-4 px-4 border-b border-gray-300 dark:border-gray-800'>
       <h1 className='text-sm'>Secret Chat</h1>
 
       <p className='text-sm text-gray-500 flex flex-col max-w-fit'>

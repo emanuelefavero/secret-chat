@@ -97,7 +97,11 @@ function App() {
             />
             <button
               onClick={sendMessage}
-              className='rounded-full py-1 px-[0.6rem] border border-blue-600 hover:bg-blue-600 active:bg-blue-700'
+              className={`${
+                messageText.trim()
+                  ? 'opacity-100'
+                  : 'opacity-75 bg-gray-300 dark:bg-black border-gray-300 dark:border-gray-700 pointer-events-none'
+              } rounded-full py-1 px-[0.6rem] border border-blue-600 hover:bg-blue-600 active:bg-blue-700 transition-opacity duration-200 ease-in`}
             >
               <img src={sendIcon} alt='Send' />
             </button>

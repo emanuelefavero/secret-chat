@@ -6,7 +6,7 @@
   --background: #fff;
   --foreground: #000;
   --primary: #3b82f6;
-  --selection: rgba(59, 131, 246, 0.3);
+  --selection: rgba(205, 224, 238, 0.3);
 }
 
 @media (prefers-color-scheme: dark) {

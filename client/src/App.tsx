@@ -76,8 +76,6 @@ function App() {
 
   return (
     <>
-      <h1 className='text-purple-500'>Secret Chat</h1>
-
       <div className='flex justify-center'>
         <main className='w-full max-w-screen-lg'>
           <div className='py-2 pb-16'>

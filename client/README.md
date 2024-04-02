@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+# Secret Chat
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a secret chat application that only stores messages in session storage. It is built with React, Node.js, and Socket.io.
 
-Currently, two official plugins are available:
+> Note: This is a work in progress. The application is not yet complete.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
 
-## Expanding the ESLint configuration
+To install the application, clone the repository and run the following commands:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+```bash
+# install root dependencies
+npm install
 
-- Configure the top-level `parserOptions` property like this:
+# install client dependencies
+cd client
+npm install
+cd ..
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+# install server dependencies
+cd server
+npm install
+cd ..
+
+# start the application
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Usage
+
+To use the application, open a browser and navigate to `http://localhost:5173/`

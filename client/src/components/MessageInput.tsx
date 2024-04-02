@@ -11,6 +11,12 @@ export default function MessageInput({
   setMessageText,
   sendMessage,
 }: Props) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      sendMessage()
+    }
+  }
+
   return (
     <div className='fixed inset-x-0 bottom-0 flex justify-center p-4 bg-white dark:bg-black border-t border-gray-300 dark:border-gray-800'>
       <div className='w-full flex max-w-screen-lg'>
@@ -19,6 +25,7 @@ export default function MessageInput({
           type='text'
           value={messageText}
           onChange={(e) => setMessageText(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder='Type your message...'
         />
         <button

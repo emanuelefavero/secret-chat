@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import { v4 as uuidv4 } from 'uuid'
+import Header from './components/Header'
 import Message from './components/Message'
 import MessageInput from './components/MessageInput'
 import { IMessage } from './types.ts'
@@ -47,9 +48,7 @@ function App() {
 
   return (
     <>
-      <header>
-        <h1>Secret Chat</h1>
-      </header>
+      <Header userId={userId} />
 
       <div className='flex justify-center'>
         <main className='w-full max-w-screen-lg'>
@@ -63,11 +62,13 @@ function App() {
             ))}
           </div>
 
-          <MessageInput
-            messageText={messageText}
-            setMessageText={setMessageText}
-            sendMessage={sendMessage}
-          />
+          <footer>
+            <MessageInput
+              messageText={messageText}
+              setMessageText={setMessageText}
+              sendMessage={sendMessage}
+            />
+          </footer>
         </main>
       </div>
     </>

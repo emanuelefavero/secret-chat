@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import { v4 as uuidv4 } from 'uuid'
-import sendIcon from '/send-icon.svg'
 import Message from './components/Message'
+import MessageInput from './components/MessageInput'
 import { IMessage } from './types.ts'
 
 // TODO check for dev or prod, add proper server url depending on that @see https://vitejs.dev/guide/env-and-mode
@@ -62,25 +62,12 @@ function App() {
               />
             ))}
           </div>
-          <div className='fixed inset-x-0 bottom-0 flex p-4 bg-white dark:bg-black border-t border-gray-300 dark:border-gray-800'>
-            <input
-              className='w-full mr-2 text-inherit bg-inherit rounded-full px-4 focus:outline-none border border-gray-300 dark:border-gray-800'
-              type='text'
-              value={messageText}
-              onChange={(e) => setMessageText(e.target.value)}
-              placeholder='Type your message...'
-            />
-            <button
-              onClick={sendMessage}
-              className={`${
-                messageText.trim()
-                  ? 'opacity-100'
-                  : 'opacity-75 bg-gray-300 dark:bg-black border-gray-300 dark:border-gray-700 pointer-events-none'
-              } rounded-full py-1 px-[0.6rem] border border-blue-600 hover:bg-blue-600 active:bg-blue-700 transition-opacity duration-200 ease-in`}
-            >
-              <img src={sendIcon} alt='Send' />
-            </button>
-          </div>
+
+          <MessageInput
+            messageText={messageText}
+            setMessageText={setMessageText}
+            sendMessage={sendMessage}
+          />
         </main>
       </div>
     </>

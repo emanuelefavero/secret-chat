@@ -89,9 +89,9 @@ function App() {
               />
             ))}
           </div>
-          <div className='fixed inset-x-0 bottom-0 flex p-4 bg-black border-t border-gray-800'>
+          <div className='fixed inset-x-0 bottom-0 flex p-4 bg-white dark:bg-black border-t border-gray-300 dark:border-gray-800'>
             <input
-              className='w-full mr-2 text-inherit bg-inherit rounded-full px-4 focus:outline-none border border-gray-800'
+              className='w-full mr-2 text-inherit bg-inherit rounded-full px-4 focus:outline-none border border-gray-300 dark:border-gray-800'
               type='text'
               value={messageText}
               onChange={(e) => setMessageText(e.target.value)}
@@ -99,7 +99,7 @@ function App() {
             />
             <button
               onClick={sendMessage}
-              className='rounded-full py-1 px-3 hover:bg-blue-600 active:bg-blue-700'
+              className='rounded-full py-1 px-[0.6rem] border border-blue-600 hover:bg-blue-600 active:bg-blue-700'
             >
               <img src={sendIcon} alt='Send' />
             </button>

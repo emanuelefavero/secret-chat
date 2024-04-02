@@ -2,45 +2,16 @@ import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import { v4 as uuidv4 } from 'uuid'
 import sendIcon from '/send-icon.svg'
+import Message from './components/Message'
+import { IMessage } from './types.ts'
 
 // TODO check for dev or prod, add proper server url depending on that @see https://vitejs.dev/guide/env-and-mode
 const serverUrl = 'http://localhost:4000'
 const socket = io(serverUrl)
 
-// --- Message Component ---
-interface MessageProps {
-  text: string
-  isCurrentUser: boolean
-}
-
-function Message({ text, isCurrentUser }: MessageProps) {
-  const currentUserMessageStyle = isCurrentUser
-    ? 'text-white bg-blue-500'
-    : 'text-gray-900 bg-gray-200 dark:text-white dark:bg-gray-900'
-  const justifyRightIfCurrentUser = isCurrentUser
-    ? 'justify-end'
-    : 'justify-start'
-
-  return (
-    <div className={`flex ${justifyRightIfCurrentUser}`}>
-      <div
-        className={`${currentUserMessageStyle} mb-2 px-3 py-1 rounded-2xl w-fit max-w-xs`}
-      >
-        <p>{text}</p>
-      </div>
-    </div>
-  )
-}
-// -------------------------
-
-interface Message {
-  userId: string
-  text: string
-}
-
 function App() {
   const [userId, setUserId] = useState('')
-  const [messages, setMessages] = useState<Message[]>([])
+  const [messages, setMessages] = useState<IMessage[]>([])
   const [messageText, setMessageText] = useState('')
 
   useEffect(() => {
@@ -53,7 +24,7 @@ function App() {
     setUserId(id)
 
     // Add a listener to receive messages
-    const messageListener = (message: Message) => {
+    const messageListener = (message: IMessage) => {
       setMessages((prevMessages) => [...prevMessages, message])
     }
 
@@ -76,9 +47,13 @@ function App() {
 
   return (
     <>
+      <header>
+        <h1>Secret Chat</h1>
+      </header>
+
       <div className='flex justify-center'>
         <main className='w-full max-w-screen-lg'>
-          <div className='py-2 pb-16'>
+          <div className='py-2 pb-16 pt-4'>
             {messages.map((message, index) => (
               <Message
                 key={index}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import io from 'socket.io-client'
 import { v4 as uuidv4 } from 'uuid'
 import Header from './components/Header'
@@ -14,6 +14,8 @@ function App() {
   const [userId, setUserId] = useState('')
   const [messages, setMessages] = useState<IMessage[]>([])
   const [messageText, setMessageText] = useState('')
+
+  const lastMessageRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Generate a random user ID and save it in session storage
@@ -38,6 +40,12 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [messages])
+
   const sendMessage = () => {
     if (messageText.trim()) {
       const message = { userId, text: messageText }
@@ -58,6 +66,7 @@ function App() {
                 key={index}
                 text={message.text}
                 isCurrentUser={message.userId === userId}
+                ref={index === messages.length - 1 ? lastMessageRef : undefined}
               />
             ))}
           </div>

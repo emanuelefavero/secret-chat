@@ -22,10 +22,10 @@ export default function Header({ userId }: Props) {
           <img
             src={logoIcon}
             alt='Logo'
-            className='w-8 h-8 inline-block mr-3'
+            className='w-8 h-8 inline-block ml-1 mr-3'
           />
         </h1>
-        <p className='text-sm text-gray-500 flex flex-col max-w-fit'>
+        <div className='text-sm text-gray-500 flex flex-col max-w-fit'>
           Your user ID is:{' '}
           <div className='relative flex flex-col items-center'>
             <button
@@ -41,7 +41,7 @@ export default function Header({ userId }: Props) {
               </span>
             )}
           </div>
-        </p>
+        </div>
       </div>
     </header>
   )

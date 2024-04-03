@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import './Message.css'
 
 interface Props {
   text: string
@@ -13,17 +14,17 @@ type Ref = HTMLDivElement
 const Message = forwardRef<Ref, Props>(
   ({ text, isCurrentUser }: Props, ref) => {
     const currentUserMessageStyle = isCurrentUser
-      ? 'text-white bg-blue-500'
-      : 'text-gray-900 bg-gray-200 dark:text-white dark:bg-gray-900'
+      ? 'text-white bg-blue-500 currentUserBubble'
+      : 'text-gray-900 bg-gray-200 dark:text-white dark:bg-gray-900 otherUserBubble'
     const justifyRightIfCurrentUser = isCurrentUser
       ? 'justify-end'
       : 'justify-start'
 
     return (
-      <div className={`flex ${justifyRightIfCurrentUser}`}>
+      <div className={`flex ${justifyRightIfCurrentUser} relative`}>
         <div
           ref={ref}
-          className={`${currentUserMessageStyle} mb-2 px-3 py-1 rounded-2xl w-fit max-w-xs`}
+          className={`${currentUserMessageStyle} mb-2 px-3 py-1 rounded-2xl w-fit max-w-xs relative`}
         >
           <p>{text}</p>
         </div>

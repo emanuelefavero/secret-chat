@@ -12,6 +12,7 @@ const serverUrl = 'http://localhost:4000'
 const socket = io(serverUrl)
 
 function App() {
+  const [cryptoKey, setCryptoKey] = useState<string>('')
   const [userId, setUserId] = useState('')
   const [messages, setMessages] = useState<IMessage[]>([])
   const [messageText, setMessageText] = useState('')
@@ -27,10 +28,31 @@ function App() {
     }
     setUserId(id)
 
+    // Generate a random key for encryption
+    async function generateKey() {
+      const key = await crypto.subtle.generateKey(
+        {
+          name: 'AES-GCM',
+          length: 256,
+        },
+        true, // extractable
+        ['encrypt', 'decrypt'] // key usages
+      )
+
+      // Export the key as a base64 string
+      const exportedKey = await crypto.subtle.exportKey('raw', key)
+      const exportedAsBase64String = btoa(
+        String.fromCharCode(...new Uint8Array(exportedKey))
+      )
+      setCryptoKey(exportedAsBase64String) // Save the key in state
+    }
+
+    generateKey()
+
     // Load and decrypt messages from session storage
     const storedMessages = sessionStorage.getItem('messages')
     if (storedMessages) {
-      decryptData(storedMessages, 'your_password')
+      decryptData(storedMessages, cryptoKey.toString())
         .then((decryptedMessages: string) => {
           try {
             const messages = JSON.parse(decryptedMessages)
@@ -50,7 +72,7 @@ function App() {
       setMessages((prevMessages) => {
         const updatedMessages = [...prevMessages, message]
         // Encrypt and save to session storage
-        encryptData(JSON.stringify(updatedMessages), 'your_password')
+        encryptData(JSON.stringify(updatedMessages), cryptoKey.toString())
           .then((encryptedMessages: string) => {
             sessionStorage.setItem('messages', encryptedMessages)
           })

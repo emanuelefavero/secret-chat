@@ -3,9 +3,9 @@
 
 export async function encryptData(
   plaintext: string,
-  password: string
+  cryptoKey: string
 ): Promise<string> {
-  const pwUtf8 = new TextEncoder().encode(password)
+  const pwUtf8 = new TextEncoder().encode(cryptoKey)
   const pwHash = await crypto.subtle.digest('SHA-256', pwUtf8)
   const iv = crypto.getRandomValues(new Uint8Array(12))
   const alg = { name: 'AES-GCM', iv: iv }
@@ -28,9 +28,9 @@ export async function encryptData(
 
 export async function decryptData(
   cipherText: string,
-  password: string
+  cryptoKey: string
 ): Promise<string> {
-  const pwUtf8 = new TextEncoder().encode(password)
+  const pwUtf8 = new TextEncoder().encode(cryptoKey)
   const pwHash = await crypto.subtle.digest('SHA-256', pwUtf8)
   const iv = cipherText
     .slice(0, 24)

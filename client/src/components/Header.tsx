@@ -17,7 +17,7 @@ export default function Header({ userId }: Props) {
   }
 
   return (
-    <header className='fixed w-full px-2 py-2 border-b border-gray-300 dark:border-gray-800'>
+    <header className='fixed z-40 w-full px-2 py-2 border-b border-gray-300 dark:border-gray-800'>
       <div className='flex items-center'>
         <h1 className='text-sm'>
           <img

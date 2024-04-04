@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Header.css'
 import logoIcon from '/logo.svg'
-import CopyIcon from './icons/CopyIcon'
+import CopyIcon from '@/components/icons/CopyIcon'
 
 interface Props {
   userId: string

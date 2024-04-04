@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import io from 'socket.io-client'
 import { v4 as uuidv4 } from 'uuid'
-import Header from './components/Header'
-import Message from './components/Message'
-import MessageInput from './components/MessageInput'
-import { IMessage } from './types.ts'
+import Header from '@/components/Header'
+import Message from '@/components/Message'
+import MessageInput from '@/components/MessageInput'
+import { IMessage } from '@/types.ts'
 
 // TODO check for dev or prod, add proper server url depending on that @see https://vitejs.dev/guide/env-and-mode
 const serverUrl = 'http://localhost:4000'

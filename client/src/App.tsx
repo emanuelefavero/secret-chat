@@ -26,9 +26,21 @@ function App() {
     }
     setUserId(id)
 
+    // Load messages from session storage
+    const storedMessages = sessionStorage.getItem('messages')
+    if (storedMessages) {
+      setMessages(JSON.parse(storedMessages))
+    }
+
     // Add a listener to receive messages
     const messageListener = (message: IMessage) => {
-      setMessages((prevMessages) => [...prevMessages, message])
+      // Save the new message in state and session storage
+      setMessages((prevMessages) => {
+        const updatedMessages = [...prevMessages, message]
+        // Save to session storage
+        sessionStorage.setItem('messages', JSON.stringify(updatedMessages))
+        return updatedMessages
+      })
     }
 
     // Listen for messages

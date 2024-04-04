@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './Header.css'
 import logoIcon from '/logo.svg'
+import CopyIcon from './icons/CopyIcon'
 
 interface Props {
   userId: string
@@ -30,9 +31,15 @@ export default function Header({ userId }: Props) {
           <div className='relative flex flex-col items-center'>
             <button
               onClick={handleCopyUserId}
-              className='text-green-500 bg-transparent px-0 w-max hover:text-green-400 hover:underline active:scale-95 transition-all duration-200 ease-in'
+              className='flex text-green-500 bg-transparent px-0 w-max hover:text-green-400 hover:underline active:scale-95 transition-all duration-200 ease-in'
             >
               <code>{userId}</code>
+
+              {!isCopied && (
+                <span className='w-4 h-4 ml-1 relative top-[1.5px]'>
+                  <CopyIcon strokeColor={isCopied ? '#22c55e' : '#6B7280'} />
+                </span>
+              )}
             </button>
 
             {isCopied && (

@@ -5,6 +5,7 @@ import Header from '@/components/Header'
 import Message from '@/components/Message'
 import MessageInput from '@/components/MessageInput'
 import { IMessage } from '@/types.ts'
+import { encryptData, decryptData } from '@/utils/crypto.ts'
 
 // TODO check for dev or prod, add proper server url depending on that @see https://vitejs.dev/guide/env-and-mode
 const serverUrl = 'http://localhost:4000'
@@ -26,10 +27,21 @@ function App() {
     }
     setUserId(id)
 
-    // Load messages from session storage
+    // Load and decrypt messages from session storage
     const storedMessages = sessionStorage.getItem('messages')
     if (storedMessages) {
-      setMessages(JSON.parse(storedMessages))
+      decryptData(storedMessages, 'your_password')
+        .then((decryptedMessages: string) => {
+          try {
+            const messages = JSON.parse(decryptedMessages)
+            setMessages(messages)
+          } catch (e) {
+            console.error('Failed to parse messages:', e)
+          }
+        })
+        .catch((error: Error) => {
+          console.error('Decryption failed:', error)
+        })
     }
 
     // Add a listener to receive messages
@@ -37,8 +49,14 @@ function App() {
       // Save the new message in state and session storage
       setMessages((prevMessages) => {
         const updatedMessages = [...prevMessages, message]
-        // Save to session storage
-        sessionStorage.setItem('messages', JSON.stringify(updatedMessages))
+        // Encrypt and save to session storage
+        encryptData(JSON.stringify(updatedMessages), 'your_password')
+          .then((encryptedMessages: string) => {
+            sessionStorage.setItem('messages', encryptedMessages)
+          })
+          .catch((error: Error) => {
+            console.error('Encryption failed:', error)
+          })
         return updatedMessages
       })
     }

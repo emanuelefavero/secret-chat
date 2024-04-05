@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { useChat } from '@/context/useChat'
-import Header from '@/components/Header'
 import Message from '@/components/Message'
 import MessageInput from '@/components/MessageInput'
 
@@ -8,6 +7,7 @@ function Chat() {
   const { userId, messages } = useChat()
   const lastMessageRef = useRef<HTMLDivElement>(null)
 
+  // Scroll to the last message when a new message is added
   useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -16,8 +16,6 @@ function Chat() {
 
   return (
     <>
-      <Header />
-
       <div className='flex justify-center px-4'>
         <main className='w-full max-w-screen-lg'>
           <div className='pb-20 pt-28'>

@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useChat } from '@/context/useChat'
 import Message from '@/components/Message'
-import MessageInput from '@/components/MessageInput'
 
 function Chat() {
   const { userId, messages } = useChat()
@@ -28,10 +27,6 @@ function Chat() {
               />
             ))}
           </div>
-
-          <footer>
-            <MessageInput />
-          </footer>
         </main>
       </div>
     </>

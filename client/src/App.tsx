@@ -1,6 +1,7 @@
 import { ChatProvider } from '@/context/ChatContext'
 import Chat from '@/components/Chat'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <ChatProvider>
         <Header />
         <Chat />
+        <Footer />
       </ChatProvider>
     </>
   )

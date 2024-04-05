@@ -1,16 +1,13 @@
 import sendIcon from '/send-icon.svg'
+import { useChat } from '@/context/useChat'
 
 interface Props {
-  messageText: string
-  setMessageText: (text: string) => void
   sendMessage: () => void
 }
 
-export default function MessageInput({
-  messageText,
-  setMessageText,
-  sendMessage,
-}: Props) {
+export default function MessageInput({ sendMessage}: Props) {
+  const { messageText, setMessageText } = useChat()
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       sendMessage()

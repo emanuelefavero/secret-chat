@@ -1,13 +1,11 @@
 import { useState } from 'react'
+import { useChat } from '@/context/useChat'
 import './Header.css'
 import logoIcon from '/logo.svg'
 import CopyIcon from '@/components/icons/CopyIcon'
 
-interface Props {
-  userId: string
-}
-
-export default function Header({ userId }: Props) {
+export default function Header() {
+  const { userId } = useChat()
   const [isCopied, setIsCopied] = useState(false)
 
   const handleCopyUserId = () => {

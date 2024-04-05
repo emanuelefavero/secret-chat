@@ -15,20 +15,14 @@ function Chat() {
 
   return (
     <>
-      <div className='flex justify-center px-4'>
-        <main className='w-full max-w-screen-lg'>
-          <div className='pb-20 pt-28'>
-            {messages.map((message, index) => (
-              <Message
-                key={index}
-                text={message.text}
-                isCurrentUser={message.userId === userId}
-                ref={index === messages.length - 1 ? lastMessageRef : undefined}
-              />
-            ))}
-          </div>
-        </main>
-      </div>
+      {messages.map((message, index) => (
+        <Message
+          key={index}
+          text={message.text}
+          isCurrentUser={message.userId === userId}
+          ref={index === messages.length - 1 ? lastMessageRef : undefined}
+        />
+      ))}
     </>
   )
 }

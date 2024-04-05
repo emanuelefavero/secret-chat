@@ -90,6 +90,8 @@ function App() {
     return () => {
       socket.off('message', messageListener)
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

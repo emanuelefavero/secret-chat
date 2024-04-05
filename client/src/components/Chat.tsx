@@ -3,10 +3,9 @@ import { useChat } from '@/context/useChat'
 import Header from '@/components/Header'
 import Message from '@/components/Message'
 import MessageInput from '@/components/MessageInput'
-import { socket } from '@/utils/socket.ts'
 
 function Chat() {
-  const { userId, messages, messageText, setMessageText } = useChat()
+  const { userId, messages } = useChat()
   const lastMessageRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -14,14 +13,6 @@ function Chat() {
       lastMessageRef.current.scrollIntoView({ behavior: 'smooth' })
     }
   }, [messages])
-
-  const sendMessage = () => {
-    if (messageText.trim()) {
-      const message = { userId, text: messageText }
-      socket.emit('sendMessage', message)
-      setMessageText('')
-    }
-  }
 
   return (
     <>
@@ -41,7 +32,7 @@ function Chat() {
           </div>
 
           <footer>
-            <MessageInput sendMessage={sendMessage} />
+            <MessageInput />
           </footer>
         </main>
       </div>

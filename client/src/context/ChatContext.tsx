@@ -1,33 +1,39 @@
 import { useState, useEffect, createContext } from 'react'
-// import io from 'socket.io-client'
 import { v4 as uuidv4 } from 'uuid'
 import { IMessage } from '@/types.ts'
 import { encryptData, decryptData } from '@/utils/crypto.ts'
 import { socket } from '@/utils/socket.ts'
 
-// TODO check for dev or prod, add proper server url depending on that @see https://vitejs.dev/guide/env-and-mode
-// const serverUrl = 'http://localhost:4000'
-// const socket = io(serverUrl)
-
-interface ChatContextType {
+interface IChatContext {
   userId: string
   messages: IMessage[]
   messageText: string
   setMessageText: (text: string) => void
+  sendMessage: () => void
 }
 
-export const ChatContext = createContext<ChatContextType>({
+export const ChatContext = createContext<IChatContext>({
   userId: '',
   messages: [],
   messageText: '',
   setMessageText: () => {},
+  sendMessage: () => {},
 })
 
+// * ChatProvider
 export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const [cryptoKey, setCryptoKey] = useState<string>('')
   const [userId, setUserId] = useState('')
   const [messages, setMessages] = useState<IMessage[]>([])
   const [messageText, setMessageText] = useState('')
+
+  const sendMessage = () => {
+    if (messageText.trim()) {
+      const message = { userId, text: messageText }
+      socket.emit('sendMessage', message)
+      setMessageText('')
+    }
+  }
 
   useEffect(() => {
     // Generate a random user ID and save it in session storage
@@ -111,7 +117,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         messages,
         messageText,
         setMessageText,
-        // sendMessage,
+        sendMessage,
       }}
     >
       {children}

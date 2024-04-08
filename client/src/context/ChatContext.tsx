@@ -42,12 +42,11 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Clear chat from client and session storage
   const handleClearChat = () => {
-    setMessages([])
-    sessionStorage.removeItem('messages')
-
     // Show the clear chat animation
     setShowClearChatAnimation(true)
     setTimeout(() => {
+      setMessages([])
+      sessionStorage.removeItem('messages')
       setShowClearChatAnimation(false)
     }, 1100)
   }

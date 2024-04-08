@@ -1,7 +1,10 @@
 import { useChat } from '@/context/useChat'
 
 export default function ClearChatButton() {
-  const { handleClearChat } = useChat()
+  const { handleClearChat, messages } = useChat()
+
+  // * If there are no messages, don't render the button
+  if (!messages.length) return null
 
   return (
     <button

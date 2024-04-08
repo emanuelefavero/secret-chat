@@ -9,6 +9,7 @@
   --chat-message-background: #e5e7eb;
   --primary: #3b82f6;
   --selection: rgba(205, 224, 238, 0.3);
+  --test: #ffffff00;
 }
 
 @media (prefers-color-scheme: dark) {

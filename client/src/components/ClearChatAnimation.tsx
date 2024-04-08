@@ -17,7 +17,7 @@ export default function ClearChatAnimation() {
   }
 
   return (
-    <div className='fixed z-10 w-full h-full flex justify-center items-center animate-pulse'>
+    <div className='fixed z-10 w-full h-full flex justify-center items-center'>
       {/* Lottie animation */}
       <Lottie
         options={defaultOptions}

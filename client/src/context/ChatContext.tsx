@@ -10,6 +10,7 @@ interface IChatContext {
   messageText: string
   setMessageText: (text: string) => void
   sendMessage: () => void
+  handleClearChat: () => void
 }
 
 export const ChatContext = createContext<IChatContext>({
@@ -18,6 +19,7 @@ export const ChatContext = createContext<IChatContext>({
   messageText: '',
   setMessageText: () => {},
   sendMessage: () => {},
+  handleClearChat: () => {},
 })
 
 // * ChatProvider
@@ -33,6 +35,12 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       socket.emit('sendMessage', message)
       setMessageText('')
     }
+  }
+
+  // Clear chat from client and session storage
+  const handleClearChat = () => {
+    setMessages([])
+    sessionStorage.removeItem('messages')
   }
 
   useEffect(() => {
@@ -118,6 +126,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         messageText,
         setMessageText,
         sendMessage,
+        handleClearChat,
       }}
     >
       {children}

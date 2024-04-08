@@ -11,6 +11,7 @@ interface IChatContext {
   setMessageText: (text: string) => void
   sendMessage: () => void
   handleClearChat: () => void
+  showClearChatAnimation: boolean
 }
 
 export const ChatContext = createContext<IChatContext>({
@@ -20,6 +21,7 @@ export const ChatContext = createContext<IChatContext>({
   setMessageText: () => {},
   sendMessage: () => {},
   handleClearChat: () => {},
+  showClearChatAnimation: false,
 })
 
 // * ChatProvider
@@ -28,6 +30,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const [userId, setUserId] = useState('')
   const [messages, setMessages] = useState<IMessage[]>([])
   const [messageText, setMessageText] = useState('')
+  const [showClearChatAnimation, setShowClearChatAnimation] = useState(false)
 
   const sendMessage = () => {
     if (messageText.trim()) {
@@ -41,6 +44,12 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const handleClearChat = () => {
     setMessages([])
     sessionStorage.removeItem('messages')
+
+    // Show the clear chat animation
+    setShowClearChatAnimation(true)
+    setTimeout(() => {
+      setShowClearChatAnimation(false)
+    }, 1100)
   }
 
   useEffect(() => {
@@ -127,6 +136,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         setMessageText,
         sendMessage,
         handleClearChat,
+        showClearChatAnimation,
       }}
     >
       {children}

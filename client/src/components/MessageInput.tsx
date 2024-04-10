@@ -33,7 +33,7 @@ export default function MessageInput() {
       <div className='w-full flex items-end max-w-screen-lg'>
         <textarea
           ref={textareaRef}
-          className='w-full mr-2 text-inherit bg-inherit rounded-3xl pt-2 pb-3 px-5 focus:outline-none border border-gray-300 dark:border-gray-800 resize-none overflow-auto'
+          className='w-full mr-2 text-inherit bg-inherit rounded-3xl pt-2 pb-3 pl-5 pr-4 focus:outline-none border border-gray-300 dark:border-gray-800 resize-none overflow-auto'
           rows={1}
           value={messageText}
           onChange={(e) => setMessageText(e.target.value)}

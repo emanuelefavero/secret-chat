@@ -33,7 +33,12 @@ export default function Header() {
                 onClick={handleCopyUserId}
                 className='flex text-green-500 bg-transparent px-0 w-max hover:text-green-400 hover:underline active:scale-95 transition-all duration-200 ease-in'
               >
-                <code>{userId}</code>
+                <code
+                  title={userId}
+                  className='truncate w-20 xxs:w-36 xs:w-fit'
+                >
+                  {userId}
+                </code>
 
                 {!isCopied && (
                   <span className='w-4 h-4 ml-1 relative top-[1.5px]'>

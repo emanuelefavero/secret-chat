@@ -9,19 +9,27 @@ export default function MessageInput() {
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto' // Reset height to recalculate
-      const maxHeight =
-        parseInt(window.getComputedStyle(textareaRef.current).lineHeight, 10) *
-        10 // Calculate max height for 10 lines
+      const lineHeight = parseInt(
+        window.getComputedStyle(textareaRef.current).lineHeight,
+        10
+      )
+      const maxHeight = lineHeight * 10 // Calculate max height for 10 lines
       const scrollHeight = textareaRef.current.scrollHeight
       textareaRef.current.style.height = `${Math.min(
         scrollHeight,
         maxHeight
       )}px`
+
+      // Hide scrollbar if content is less than 10 lines
+      if (scrollHeight <= maxHeight) {
+        textareaRef.current.style.overflowY = 'hidden'
+      } else {
+        textareaRef.current.style.overflowY = 'auto'
+      }
     }
   }, [messageText]) // Re-calculate height whenever messageText changes
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    // Check if Enter was pressed without shift key
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault() // Prevent new line
       sendMessage()
@@ -33,7 +41,7 @@ export default function MessageInput() {
       <div className='w-full flex items-end max-w-screen-lg'>
         <textarea
           ref={textareaRef}
-          className='w-full mr-2 text-inherit bg-inherit rounded-3xl pt-2 pb-3 pl-5 pr-4 focus:outline-none border border-gray-300 dark:border-gray-800 resize-none overflow-auto'
+          className='w-full mr-2 text-inherit bg-inherit rounded-3xl pt-2 pb-3 pl-5 pr-4 focus:outline-none border border-gray-300 dark:border-gray-800 resize-none'
           rows={1}
           value={messageText}
           onChange={(e) => setMessageText(e.target.value)}
